@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="library">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="stylesheet" href="jqgrid/css/ui.jqgrid.css"/>
+    <link rel="stylesheet" href="jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css" />
+
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body ng-controller="parentController">
+<div class="container-fluid my-header">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="" class="logo-text"><img src="images/boklogo.png" alt=""/> 设备管理系统</a>
+        </div>
+        <div class=" col-lg-9 my-login">
+            <a class="pull-right back">退出 | <span class="glyphicon glyphicon-share-alt"></span></a>
+            <a class="pull-right my-register" href="#/register">注册 | <span class="glyphicon glyphicon-user"></span></a>
+            <a class="pull-right loginBtn" href="#/login" >登录 | <span class="glyphicon glyphicon-off"></span></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid my-main">
+    <div class="row ">
+        <div class="col-sm-3  my-left">
+            <div class="book-list">
+                <p>设备管理系统菜单</p>
+                <ul id="accordion" class="accordion">
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 my-right" >
+            <ng-view class="page"></ng-view>
+        </div>
+    </div>
+</div>
+<div class="my-round">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="banner clearfloat ">
+                <div id="igs ">
+                    <div class="ig"><img class="banner-img " src="images/sy-1.jpg" alt="" /></div>
+                    <div class="ig"><img class="banner-img" src="images/sy-2.jpg" alt=""/></div>
+                    <div class="ig"><img class="banner-img" src="images/sy-3.jpg" alt=""/></div>
+                    <div class="ig"><img class="banner-img" src="images/sy-4.jpg" alt=""/></div>
+                    <div class="ig"><img class="banner-img" src="images/sy-5.jpg" alt=""/></div>
+                </div>
+                <div id="tabs">
+                    <div class="tab bg"></div>
+                    <div class="tab"></div>
+                    <div class="tab"></div>
+                    <div class="tab"></div>
+                    <div class="tab"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+
+</div>
+<script></script>
+<script src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="jqgrid/js/jquery.jqGrid.src.js"></script>
+<script type="text/javascript" src="jqgrid/js/i18n/grid.locale-cn.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/angular-animate.js"></script>
+<script src="js/myapp.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
