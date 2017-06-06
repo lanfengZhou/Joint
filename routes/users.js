@@ -173,7 +173,6 @@ router.post('/query',function(req,res){
             }else{
                 for (var i = 0; i < vals.length; i++) {
                     vals[i].insertTime=moment(vals[i].insertTime).format('YYYY-MM-DD HH:mm:ss');
-                    // vals[i].updateTime=moment(vals[i].updateTime).format('YYYY-MM-DD HH:mm:ss');
                 }
                 res.json({'success':true,'total':total,'pages':pages,'users':vals});
             }
