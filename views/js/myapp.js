@@ -72,7 +72,7 @@ app.controller('registerCtrl',['$scope',function($scope){
 app.controller('loginCtrl',['$scope','$http','$location',function($scope,$http,$location){
     $scope.submit=function(){
 
-        $http({method:'POST',url:'/login/lg',data:{uname:$scope.uname,pwd:$scope.pwd}})
+        $http({method:'POST',url:'/user/login',data:{uname:$scope.uname,pwd:$scope.pwd}})
             .then(function(data){
                 if(data.data.length!=0){
                     $('.prompt').html('登录').css('color','#333');

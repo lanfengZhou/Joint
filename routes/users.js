@@ -76,7 +76,7 @@ router.post('/checkAccount',function(req,res){
 /**
  * 用户登录
  */
-router.get('/login',function(req,res){
+router.post('/login',function(req,res){
     var account=req.body.account;
     var password=req.body.password;
     query('select * from user where account='+account+' and password='
@@ -87,7 +87,7 @@ router.get('/login',function(req,res){
             if(vals.length!==0){
                 res.json({'success':true,'result':'failed'});
             }else{
-                res.cookie('userid',vals[0].id,{path:'/user',maxAge:1000*60*30,httpOnly:true});
+                res.cookie('account',vals[0].account,{path:'/user',maxAge:1000*60*30,httpOnly:true});
                 res.json({'success':true,'result':'ok'});
             }
         }
@@ -97,13 +97,16 @@ router.get('/login',function(req,res){
  * 获取用户信息
  */
 router.get('/getUserInfo',function(req,res){
-    var id=req.cookie.userid;
+    var account=req.cookies.account;
     //if(id) {
-        query('select * from user where id=' + id, function (err, vals, fileds) {
+        query('select * from user where account=' + account, function (err, vals, fileds) {
             if (err) {
                 console.log(err);
                 res.json({'success':true,'result':'failed'});
             } else {
+                for (var i = 0; i < vals.length; i++) {
+                    vals[i].insertTime=moment(vals[i].insertTime).format('YYYY-MM-DD HH:mm:ss');
+                }
                 res.json({'success': true, 'result': vals});
             }
         });
@@ -129,10 +132,10 @@ router.post('/edit',function(req,res){
  * 修改用户密码
  */
 router.post('/editPwd',function(req,res){
-    var id=req.cookie.id,
+    var id=req.cookies.account,
         newPwd=req.body.newPwd,
         oldPwd=req.body.oldPwd;
-    query('update user set password=\"'+newPwd+'\" where id='+id+' and password=\"'+oldPwd+'\"',function(err,vals,fileds){
+    query('update user set password=\"'+newPwd+'\" where account='+account+' and password=\"'+oldPwd+'\"',function(err,vals,fileds){
        if(err){
            console.log(err);
            res.json({'success':true,'result':'failed','reason':'wrongPwd'});
@@ -146,7 +149,7 @@ router.post('/editPwd',function(req,res){
  *注销用户
  */
 router.get('/logOut',function(req,res){
-    res.clearCookie('userid', { path: '/user' });
+    res.clearCookie('account', { path: '/user' });
     res.redirect('../');
 
 });
