@@ -8,7 +8,7 @@
     <script src="js/jquery-1.11.3.js"></script>
     <script type="text/javascript">
         $('#test').click(function(){
-            $.post('/device/back',{id:9,number:8,alias:'实物8',info:'2222',belong:'A'},function(data){
+            $.post('/hisdata/delete',{id:3,rows:10},function(data){
                 console.log(data);
             })
         })

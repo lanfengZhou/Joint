@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2017-06-20 15:28:33
+Date: 2017-06-20 21:59:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,28 @@ INSERT INTO `device` VALUES ('4', '实物4', '4', 'A', null, '1', '2017-06-20 14
 INSERT INTO `device` VALUES ('5', '实物5', '5', 'A', null, '1', '2017-06-20 14:05:55');
 INSERT INTO `device` VALUES ('6', '实物6', '6', 'A', null, '1', '2017-06-20 14:06:13');
 INSERT INTO `device` VALUES ('7', '实物7', '7', 'A', null, '1', '2017-06-20 14:07:02');
-INSERT INTO `device` VALUES ('9', '实物8', '8', 'A', '2222', '1', '2017-06-20 15:18:20');
+INSERT INTO `device` VALUES ('9', '实物8', '8', 'A', '2222', '0', '2017-06-20 16:55:38');
+
+-- ----------------------------
+-- Table structure for hisdata
+-- ----------------------------
+DROP TABLE IF EXISTS `hisdata`;
+CREATE TABLE `hisdata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `device_id` int(11) NOT NULL,
+  `value` varchar(40) NOT NULL,
+  `insertTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `deviceID` (`device_id`) USING BTREE,
+  CONSTRAINT `deviceID` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of hisdata
+-- ----------------------------
+INSERT INTO `hisdata` VALUES ('4', '9', '0', '2017-06-20 16:48:50');
+INSERT INTO `hisdata` VALUES ('5', '9', '1', '2017-06-20 16:55:15');
+INSERT INTO `hisdata` VALUES ('6', '9', '0', '2017-06-20 16:55:38');
 
 -- ----------------------------
 -- Table structure for user

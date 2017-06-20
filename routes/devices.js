@@ -93,12 +93,19 @@ router.post('/edit',function(req,res){
  */
 router.post('/borrow',function(req,res){
     var id=req.body.id;
+    var date=moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
     query('update device set state=0 where id='+id,function(err,vals,fileds){
         if(err){
             console.log(err);
             res.json({'success':true,'result':'failed'});
         }else{
-            res.json({'success':true,'result':'ok'});
+            query('insert into hisdata(device_id,value,insertTime) values ('+id+',\"'+0+'\",\"'+date+'\")',function(err,vals,fileds){
+                if(err){
+                    console.log(err);
+                }else{
+                    res.json({'success':true,'result':'ok'});
+                }
+            });
         }
     });
 });
@@ -107,12 +114,19 @@ router.post('/borrow',function(req,res){
  */
 router.post('/back',function(req,res){
     var id=req.body.id;
+    var date=moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
     query('update device set state=1 where id='+id,function(err,vals,fileds){
         if(err){
             console.log(err);
             res.json({'success':true,'result':'failed'});
         }else{
-            res.json({'success':true,'result':'ok'});
+            query('insert into hisdata(device_id,value,insertTime) values ('+id+',\"'+1+'\",\"'+date+'\")',function(err,vals,fileds){
+                if(err){
+                    console.log(err);
+                }else{
+                    res.json({'success':true,'result':'ok'});
+                }
+            });
         }
     });
 })
