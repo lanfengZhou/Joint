@@ -119,7 +119,7 @@ router.post('/edit',function(req,res){
     var id=req.body.id,
         name=req.body.name,
         phone=req.body.phone;
-    query('update user set name=\"'+name+'\",\"'+phone+'\" where id='+id,function(err,vals,fileds){
+    query('update user set name=\"'+name+'\",'+'phone=\"'+phone+'\" where id='+id,function(err,vals,fileds){
         if(err){
             console.log(err);
             res.json({'success':true,'result':'failed'});
@@ -164,7 +164,7 @@ router.post('/query',function(req,res){
         total,
         pages;
     var filters=req.body.account;
-    //var sql=filterQuery()
+    var sql=filterQuery(filters,start,limit);
     query('select * from user',function(err,vals,fileds){
         total=vals.length;
         pages=Math.ceil(total/rows);
