@@ -51,7 +51,7 @@ router.post('/add',function(req,res){
             res.json({'success':true,'result':'failed'});
         }else{
 
-            res.json({'success':true,'result':'failed'});
+            res.json({'success':true,'result':'ok'});
         }
 
     });
