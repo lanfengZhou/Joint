@@ -13,7 +13,7 @@ router.post('/query',function(req,res){
     var page=req.body.page,
         rows=req.body.rows,
         start=rows*(page-1),
-        limit=rows*page,
+        limit=rows,
         total,
         pages;
     var filters=req.body.alias;

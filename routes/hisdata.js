@@ -7,20 +7,19 @@ var moment = require("moment");
 var filterQuery=require("./hisdataServices");
 
 /**
- * hisdataQuery
+ * gethisdata
  */
-router.post('/getHisdata',function(req,res){
+router.post('/query',function(req,res){
     var page=req.body.page,
-        rows=req.body.rows,
-        start=rows*(page-1),
-        limit=rows*page,
+        limit=req.body.rows,
+        start=limit*(page-1),
         total,
         pages;
-    var filters=req.body.alias;
+    var filters=req.body.filters;
     var sql=filterQuery(filters,start,limit);
     query('select * from hisdata',function(err,vals,fileds){
         total=vals.length;
-        pages=Math.ceil(total/rows);
+        pages=Math.ceil(total/limit);
         query(sql,function(err,vals,fileds){
             if(err){
                 console.log(err);
@@ -30,12 +29,11 @@ router.post('/getHisdata',function(req,res){
                 for (var i = 0; i < vals.length; i++) {
                     vals[i].insertTime=moment(vals[i].insertTime).format('YYYY-MM-DD HH:mm:ss');
                 }
-                res.json({'success':true,'total':total,'pages':pages,'data':vals});
+                res.json({'success':true,'total':total,'pages':pages,'hisdata':vals});
             }
         });
     });
 });
-
 /**
  * delete
  */

@@ -8,9 +8,13 @@
     <script src="js/jquery-1.11.3.js"></script>
     <script type="text/javascript">
         $('#test').click(function(){
-            $.post('/hisdata/delete',{id:3,rows:10},function(data){
+            // $.post('/hisdata/query',{page:1,rows:4,filters:"{\"alias\":\"实物\",\"startTime\":\"2017-06-20\",\"endTime\":\"2017-06-20\"}"},function(data){
+            //     console.log(data);
+            // })
+              $.post('/hisdata/delete',{id:1,page:1,rows:4,filters:"{\"alias\":\"实物\",\"startTime\":\"2017-06-20\",\"endTime\":\"2017-06-20\"}"},function(data){
                 console.log(data);
             })
+
         })
     </script>
 </body>
