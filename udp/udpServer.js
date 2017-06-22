@@ -1,10 +1,9 @@
 var dgram = require('dgram');
 var iconv = require("iconv-lite");
-var query= require('./lib/db/mysql');
+var query= require('./../lib/db/mysql');
 
 
 var clientSocket = dgram.createSocket('udp4');
-
 clientSocket.on('message', function(msg, rinfo){
     var revice=Buffer.from(msg);
     var messages=JSON.parse(revice.toString());
