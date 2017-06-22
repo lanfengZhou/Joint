@@ -19,6 +19,7 @@
   "devDependencies": {
     "captchapng": "0.0.1",
     "express-session": "^1.15.3",
+    "iconv-lite": "^0.4.18",
     "moment": "^2.18.1"
   }
 }

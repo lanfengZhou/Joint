@@ -39,7 +39,16 @@ router.post('/query',function(req,res){
  * add
  */
 router.post('/add',function(req,res){
-    var number=req.body.number,
+    function format(num, len) {
+        var l = num.length;
+        if (num.length < len) {
+            for (var i = 0; i < len - l; i++) {
+                num = "0" + num;
+            }
+        }
+        return num;
+    }
+    var number=format(parseInt(req.body.number).toString(16).toUpperCase(),6),
         alias=req.body.alias,
         info=req.body.info,
         belong=req.body.belong;

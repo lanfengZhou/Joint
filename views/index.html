@@ -11,10 +11,12 @@
             // $.post('/hisdata/query',{page:1,rows:4,filters:"{\"alias\":\"实物\",\"startTime\":\"2017-06-20\",\"endTime\":\"2017-06-20\"}"},function(data){
             //     console.log(data);
             // })
-              $.post('/hisdata/delete',{id:1,page:1,rows:4,filters:"{\"alias\":\"实物\",\"startTime\":\"2017-06-20\",\"endTime\":\"2017-06-20\"}"},function(data){
+            //   $.post('/hisdata/delete',{id:1,page:1,rows:4,filters:"{\"alias\":\"实物\",\"startTime\":\"2017-06-20\",\"endTime\":\"2017-06-20\"}"},function(data){
+            //     console.log(data);
+            // })
+            $.post('/device/add',{alias:'实验箱11',number:'00322772',belong:'library1',info:'111',state:'1'},function(data){
                 console.log(data);
             })
-
         })
     </script>
 </body>

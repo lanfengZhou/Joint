@@ -1,16 +1,16 @@
 var dgram = require('dgram');
-
-var clientSocket = dgram.createSocket('udp4');
+var iconv = require("iconv-lite");
 var query= require('./lib/db/mysql');
 
+
+var clientSocket = dgram.createSocket('udp4');
 
 clientSocket.on('message', function(msg, rinfo){
     var revice=Buffer.from(msg);
     var messages=JSON.parse(revice.toString());
     var rfidList=messages.rfidList;
-
+    console.log(rfidList);
     var listArr=rfidList.substr(1,rfidList.length-2).split(', ');
-    console.log(listArr);
     var rightGoods='',
         lostGoods='';
     query('select number,alias from device where belong=\"'+messages.libName+'\"',function(err,vals,fileds){
@@ -21,30 +21,17 @@ clientSocket.on('message', function(msg, rinfo){
                 rightGoods+=item.alias+';'
             }
         });
-        console.log(lostGoods+'||'+rightGoods);
-
+        var str='{\"what\":\"7782\",\"rightGoods\":\"'+rightGoods+'\",\"lostGoods\":\"'+lostGoods+'\"}';
+        var rawStr=iconv.encode(str,'gbk');
+        clientSocket.send(rawStr,rinfo.port, rinfo.address, function(err,bytes) {
+            if(err){
+                clientSocket.close();
+            }else{
+                console.log('成功返回查询结果!!!');
+            }
+        });
     });
-    //var reg=/(\d+\.\d+)+/gi;
-    //var matches=reg.exec(messages);
-    //var lat=matches[0];
-    //matches=reg.exec(messages);
-    //var lng=matches[0];
-    //// console.log(messages);
-    //// console.log(lat+','+lng);
-    //
-    //var lats=parseInt(lat/100)+(lat%parseFloat(100))/parseFloat(60);
-    //var lngs=parseInt(lng/100)+(lng%parseFloat(100))/parseFloat(60);
-    //var coordinate=lats+','+lngs;
-    //// console.log(lats);
-    //query('update gpsobj set lastValue="'+coordinate+'" where id=1',function(err,vals,fileds){
-    //    if (err==null) {
-    //
-    //    }else{
-    //        console.log(err);
-    //    }
-    //});
 });
-
 clientSocket.on('error', function(err){
     console.log('error, msg - %s, stack - %s\n', err.message, err.stack);
 });
