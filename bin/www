@@ -8,7 +8,9 @@ var app = require('../app');
 var debug = require('debug')('devicemanage:server');
 var http = require('http');
 var child_process = require('child_process');
-var childprocess=child_process.fork('./udp/udpServer');
+var childprocess1=child_process.fork('../udp/udpServer');
+var childprocess2=child_process.fork('../udp/RfidReader');
+
 /**
  * Get port from environment and store in Express.
  */

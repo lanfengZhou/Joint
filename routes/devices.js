@@ -5,7 +5,6 @@ var captchapng=require('captchapng');
 var session=require('express-session');
 var moment = require("moment");
 var filterQuery=require("./deviceServices");
-
 /**
  * deviceQuery
  */
@@ -38,16 +37,16 @@ router.post('/query',function(req,res){
 /**
  * add
  */
-router.post('/add',function(req,res){
-    function format(num, len) {
-        var l = num.length;
-        if (num.length < len) {
-            for (var i = 0; i < len - l; i++) {
-                num = "0" + num;
-            }
+function format(num, len) {
+    var l = num.length;
+    if (num.length < len) {
+        for (var i = 0; i < len - l; i++) {
+            num = "0" + num;
         }
-        return num;
     }
+    return num;
+}
+router.post('/add',function(req,res){
     var number=format(parseInt(req.body.number).toString(16).toUpperCase(),6),
         alias=req.body.alias,
         info=req.body.info,
@@ -138,5 +137,25 @@ router.post('/back',function(req,res){
             });
         }
     });
-})
+});
+/**
+ * alarm
+ */
+router.get('/alarm',function(req,res,next){
+   //query('select * from ')
+    console.log(flag);
+});
+/**
+ * checknum标签唯一性检查
+ */
+router.post('/checknum',function(req,res,next){
+    var number=format(parseInt(req.body.number).toString(16).toUpperCase(),6);
+    query('select number from device where number=\"'+number+'\"',function(err,vals,fileds){
+        if(vals.length>0){
+            res.json({'success':true,'result':'exist'});
+        }else{
+            res.json({'success':true,'result':'ok'});
+        }
+    });
+});
 module.exports = router;
